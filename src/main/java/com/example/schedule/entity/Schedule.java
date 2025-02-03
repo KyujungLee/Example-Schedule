@@ -25,9 +25,11 @@ public class Schedule {
         this.schedule_password = schedule_password;
         this.schedule_updated_at = schedule_updated_at;
     }
-    public Schedule(Long schedule_id, String schedule_password){
+    public Schedule(Long schedule_id, String schedule_password, String schedule_todo, String schedule_name){
         this.schedule_id = schedule_id;
         this.schedule_password = schedule_password;
+        this.schedule_todo = schedule_todo;
+        this.schedule_name = schedule_name;
     }
 
 }

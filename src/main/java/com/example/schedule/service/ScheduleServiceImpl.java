@@ -24,7 +24,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
 
-    // 각 변수의 null 체크, 값이 있다면 저장.
+    // 각 변수의 null 체크, 이메일 format 체크, 검증 후 저장.
     @Override
     public ScheduleResponseDto saveSchedule(String schedule_todo, String schedule_name, String schedule_password, String writer_email) {
 
@@ -35,6 +35,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         formatCheckThrow(writer_email);
 
         LocalDateTime localDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+
         Long writer_id = scheduleRepository.checkWriterDuplication(schedule_name, writer_email);
 
         if (writer_id == null){
@@ -64,13 +65,19 @@ public class ScheduleServiceImpl implements ScheduleService{
 
 
     // password null 체크, 값이 있다면 id 와 password 체크. 검증 후 데이터 수정
-    // 업데이트 할 데이터가 없는데 업데이트
+    // 업데이트 할 데이터가 없는데 업데이트 하려 하는 경우 차단.
     @Override
     public ScheduleResponseDto updateSchedule(Long schedule_id, String schedule_todo, String schedule_name, String schedule_password) {
 
         nullCheckThrow(schedule_password, "비밀번호");
 
         Schedule result = scheduleRepository.checkPassword(schedule_id, schedule_password);
+
+        if (result.getSchedule_todo().equals(schedule_todo) && result.getSchedule_name().equals(schedule_name)){
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이전과 내용이 같습니다.");
+
+        }
 
         return scheduleRepository.updateSchedule(schedule_id, schedule_todo, schedule_name, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }

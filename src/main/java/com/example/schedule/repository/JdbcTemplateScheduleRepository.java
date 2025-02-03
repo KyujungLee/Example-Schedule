@@ -181,7 +181,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
     public Schedule checkPassword(Long schedule_id, String schedule_password) {
 
         List<Schedule> schedule = jdbcTemplate.query(
-                "select schedule_id, schedule_password from schedule where schedule_id = ? and schedule_password = ?",
+                "select schedule_id, schedule_password, schedule_todo, schedule_name from schedule where schedule_id = ? and schedule_password = ?",
                 scheduleRowMapperCheckPassword(),
                 schedule_id,
                 schedule_password
@@ -214,8 +214,10 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
             @Override
             public Schedule mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new Schedule(
-                        rs.getLong("id"),
-                        rs.getString("password")
+                        rs.getLong("schedule_id"),
+                        rs.getString("schedule_password"),
+                        rs.getString("schedule_todo"),
+                        rs.getString("schedule_name")
                 );
             }
         };
