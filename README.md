@@ -1,6 +1,6 @@
 # Example-Schedule
 
-## Schedule Lv.1 / Lv.2
+## Schedule Lv.1 ~ 6
 
 ### ERD
 ![Image](https://github.com/user-attachments/assets/86e00ea3-cb8d-4d3d-891c-9e06015a1275)
