@@ -2,7 +2,6 @@ package com.example.schedule.controller;
 
 import com.example.schedule.dto.ScheduleRequestDto;
 import com.example.schedule.dto.ScheduleResponseDto;
-import com.example.schedule.dto.WriterRequestDto;
 import com.example.schedule.service.ScheduleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,14 +24,13 @@ public class ScheduleController {
     // 스케쥴 생성 API
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(
-            @RequestBody ScheduleRequestDto scheduleRequestDto,
-            @RequestBody WriterRequestDto writerRequestDto
+            @RequestBody ScheduleRequestDto scheduleRequestDto
             ) {
         return new ResponseEntity<>(scheduleService.saveSchedule(
                         scheduleRequestDto.getSchedule_todo(),
                         scheduleRequestDto.getSchedule_name(),
                         scheduleRequestDto.getSchedule_password(),
-                        writerRequestDto.getWriter_email()
+                        scheduleRequestDto.getWriter_email()
                 ),
                 HttpStatus.CREATED
         );
@@ -75,9 +73,9 @@ public class ScheduleController {
     @DeleteMapping("/{schedule_id}")
     public ResponseEntity<Void> deleteSchedule(
             @PathVariable Long schedule_id,
-            @RequestBody String schedule_password
+            @RequestBody ScheduleRequestDto scheduleRequestDto
             ){
-        scheduleService.deleteSchedule(schedule_id, schedule_password);
+        scheduleService.deleteSchedule(schedule_id, scheduleRequestDto.getSchedule_password());
         return new ResponseEntity<>( HttpStatus.OK);
     }
 }

@@ -80,7 +80,12 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
                 writer_email
         );
 
-        return writer.get(0).getWriter_id();
+        if (writer.isEmpty()){
+            return null;
+        } else {
+            return writer.get(0).getWriter_id();
+        }
+
     }
 
     // StringBuilder 를 이용하여 조건부 쿼리 작성, List<Object> 를 이용하여 적합한 파라미터 배열 부여
@@ -102,22 +107,22 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository{
             }
             if (schedule_name != null){
                 if (!firstField){
-                    sql.append(",");
+                    sql.append("and");
                 }
-                sql.append(" name = ? ");
+                sql.append(" schedule_name = ? ");
                 params.add(schedule_name);
                 firstField = false;
             }
             if (findTime != null){
                 if (!firstField){
-                    sql.append(",");
+                    sql.append("and");
                 }
-                sql.append("date(updated_at) = ? ");
+                sql.append("date(schedule_updated_at) = ? ");
                 params.add(findTime);
             }
 
         }
-        sql.append(" order by updated_at desc");
+        sql.append(" order by schedule_updated_at desc");
 
         return jdbcTemplate.query(sql.toString(), scheduleRowMapper(), params.toArray());
     }
