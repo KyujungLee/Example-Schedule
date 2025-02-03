@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ScheduleResponseDto {
 
-    Long id;
-    String todo;
-    String name;
-    LocalDateTime updated_at;
+    Long schedule_id;
+    String schedule_todo;
+    String schedule_name;
+    LocalDateTime schedule_updated_at;
 
 }

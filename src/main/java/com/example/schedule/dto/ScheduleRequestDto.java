@@ -3,14 +3,13 @@ package com.example.schedule.dto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 public class ScheduleRequestDto {
 
-    String todo;
-    String name;
-    String password;
-    LocalDateTime updated_at;
+    String schedule_todo;
+    String schedule_name;
+    String schedule_password;
+    LocalDateTime schedule_updated_at;
 
 }

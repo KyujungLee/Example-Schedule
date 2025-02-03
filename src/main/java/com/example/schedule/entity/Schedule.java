@@ -9,24 +9,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Schedule {
 
-    Long id;
-    String todo;
-    String name;
-    String password;
-    LocalDateTime created_at;
-    LocalDateTime updated_at;
+    Long schedule_id;
+    Long writer_id;
+    String schedule_todo;
+    String schedule_name;
+    String schedule_password;
+    LocalDateTime schedule_created_at;
+    LocalDateTime schedule_updated_at;
 
-    public Schedule(String todo, String name, String password, LocalDateTime updated_at){
-        this.todo = todo;
-        this.name = name;
-        this.password = password;
-        this.updated_at = updated_at;
-    }
-    public Schedule(Long id, String password){
-        this.id = id;
-        this.password = password;
-    }
 
-    public Schedule(){}
+    public Schedule(Long writer_id, String schedule_todo, String schedule_name, String schedule_password, LocalDateTime schedule_updated_at){
+        this.writer_id = writer_id;
+        this.schedule_todo = schedule_todo;
+        this.schedule_name = schedule_name;
+        this.schedule_password = schedule_password;
+        this.schedule_updated_at = schedule_updated_at;
+    }
+    public Schedule(Long schedule_id, String schedule_password){
+        this.schedule_id = schedule_id;
+        this.schedule_password = schedule_password;
+    }
 
 }
