@@ -3,7 +3,7 @@
 ## Schedule Lv.1 ~ 6
 
 ### ERD
-![Image](https://github.com/user-attachments/assets/86e00ea3-cb8d-4d3d-891c-9e06015a1275)
+![Image](https://github.com/user-attachments/assets/439c330f-3c05-46be-a96b-68b6b388401a)
 
 ### API 명세서
 |기능|Method|URL| request  |response|상태코드|
